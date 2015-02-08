@@ -1,0 +1,19 @@
+## Interface: 50001
+## Title: ColorPickerPlus
+## Notes: Hooks into the standard Color Picker to provide text entry for colors (RGB and hex values), copy and paste, and starting color and copied color swatches
+## Author: jaslm
+## DefaultState: Enabled
+## X-Curse-Packaged-Version: r23
+## X-Curse-Project-Name: ColorPickerPlus
+## X-Curse-Project-ID: colorpickerplus
+## X-Curse-Repository-ID: wow/colorpickerplus/mainline
+## X-Curse-Packaged-Version: r3
+## X-Curse-Project-Name: CursorCastbar
+## X-Curse-Project-ID: cursorcastbar
+## X-Curse-Repository-ID: wow/cursorcastbar/mainline
+
+#@no-lib-strip@
+embeds.xml
+#@end-no-lib-strip@
+
+ColorPickerPlus.lua

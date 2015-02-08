@@ -1,0 +1,20 @@
+------------------------------------------------------------------------
+r23 | jaslm | 2012-08-26 17:32:56 +0000 (Sun, 26 Aug 2012) | 1 line
+Changed paths:
+   M /trunk/.pkgmeta
+   M /trunk/ColorPickerPlus.toc
+
+Creation of beta release for 5.0.4
+------------------------------------------------------------------------
+r22 | jaslm | 2012-08-19 00:40:12 +0000 (Sun, 19 Aug 2012) | 1 line
+Changed paths:
+   M /trunk/ColorPickerPlus.lua
+
+Fix to prevent ColorPickerPlus from being dragged completely offscreen.
+------------------------------------------------------------------------
+r21 | jaslm | 2011-11-30 15:42:22 +0000 (Wed, 30 Nov 2011) | 1 line
+Changed paths:
+   M /trunk/ColorPickerPlus.toc
+
+Bump version for 4.3
+------------------------------------------------------------------------

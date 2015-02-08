@@ -1,0 +1,20 @@
+﻿--[[ 
+
+	CursorCastbar
+	¯¯¯¯¯¯¯¯¯¯¯¯¯¯
+	> ToDo list
+
+	
+	- Alpha, Vis, Framelevel -Funktionen entfernen
+	- Alpha, sCale, Framelevel etc. -Handling in CraeteFrame einfügen
+	- Optionen für SpellIcon fertigstellen (posx, posy, size, scale, Form (rund/eckig))
+	
+	- Castbar-Bedingungen:
+		- ist freundlich/feindlich
+		- unterbrechbar
+
+	- Opitionen & Frames abhängig vom den aktivierten UnitIDs/Einheiten-Namen erstellen	!!!!!!!!
+
+]]
+
+

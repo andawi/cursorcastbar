@@ -3723,9 +3723,6 @@ function CursorCastbar:CheckCooldowns(event, CurrentTime)
 			local db = self.db.profile.DotIndicators[i]
 			if db.enabled and db.Type == "Cooldown" then
 				local t = CursorCastbar.SpellList.DotIndicators[i]
-				--debug
-				print(t)
-				
 				for s,v in pairs(t) do
 					local start, duration, enabled = GetSpellCooldown(s)
 					
@@ -3771,22 +3768,7 @@ function CursorCastbar:RefreshMOBuff(event, CurrentTime)
 		return
 	else
 		hasmouseover = true
-		--mouseoverGUID = UnitGUID("mouseover")
-		--[=[
-		for i=1,8 do
-			t = CursorCastbar.SpellList.BarIndicator.Mouseover[i]
-			enabled = true
-			for s=1,#t.Spells do
-				if enabled and t.Filter ~= "" then
-					local name, rank, icon, count, debuffType, duration, expirationTime, unitCaster, isStealable, shouldConsolidate, spellId, canApplyAura, isBossDebuff, value1, value2, value3 = UnitAura("mouseover", t.Spells[s], nil, t.Filter)
-					if name then
-					--	print("CCB: MO - StartBar "..i.."  >"..name.."<")
-						CursorCastbar:StartBar(3, "default", false, false, (expirationTime - duration)*1000, expirationTime*1000, name, icon)
-					end
-				end
-			end
-		end
-		]=]
+
 		for i=1,8 do
 			if self.db.profile.BarIndicators.enabled == true then
 				local db = self.db.profile.BarIndicators[i]
@@ -4028,8 +4010,7 @@ end
 function CursorCastbar:UpdateDotIndicators(CurrentTime)
 	if DotIndicatorUpdateInProgress then return end
 	DotIndicatorUpdateInProgress = true
-		
-	--	/run local nb,e=GetTime(),GetTime()+10 for i=1,8 do CursorCastbar.Frames.DotIndicators[i]={Visible=true,EndTime=e,NextBlink=nb,Name="TestName"..i,} end
+	
 --Indicators
 	for i=1,8 do
 		if self.db.profile.DotIndicators[i].enabled then
@@ -4044,7 +4025,7 @@ function CursorCastbar:UpdateDotIndicators(CurrentTime)
 					if self.db.profile.DotIndicators[i].blink then
 						if CursorCastbar.Frames.DotIndicators[i].NextBlink <= CurrentTime then
 							CursorCastbar.Frames.DotIndicators[i].NextBlink = CurrentTime + (CursorCastbar.db.profile.DotIndicators[i].blinkvalue *  1000)
-							if Indicator:IsVisible() then
+							if Indicator:IsVisible() and InCombatLockdown() then	--blink only in combat
 								Indicator:Hide()
 							else
 								Indicator:Show()
@@ -5156,15 +5137,42 @@ function CursorCastbar:CreateFrame(frametype, name, i, visible)
 		local tmpTexture = _G["CursorCastbarDotIndicator"..i]
 		if not tmpTexture then
 			tmpTexture = pf:CreateTexture("CursorCastbarDotIndicator"..i, "ARTWORK")
-		--	tmpTexture.Name = name
+			tmpTexture.Name = "CursorCastbarDotIndicator"..i
 		end
 		tmpTexture:ClearAllPoints()
 		tmpTexture:SetPoint("CENTER")
-		tmpTexture:SetWidth(50)  
-		tmpTexture:SetHeight(50) 
+-- dot size		
+		tmpTexture:SetWidth(100)  
+		tmpTexture:SetHeight(100) 
 		tmpTexture:SetTexture("Interface\\Addons\\CursorCastbar\\BarTextures\\IndicatorLarge")
-		local rot = 0 + (i * 15) - 15
-		CursorCastbarTransform(math.cos(math.rad(rot)), -math.sin(math.rad(rot)),0.5,math.sin(math.rad(rot)), math.cos(math.rad(rot)),0.5, 0.5, 0.5, 1, tmpTexture:GetName())
+		
+		--obsolete - dot indicators rotaion
+		--local rot = 0 + (i * 15) - 15
+		--CursorCastbarTransform(math.cos(math.rad(rot)), -math.sin(math.rad(rot)),0.5,math.sin(math.rad(rot)), math.cos(math.rad(rot)),0.5, 0.5, 0.5, 1, tmpTexture:GetName())
+		
+		if tmpTexture.Name == "CursorCastbarDotIndicator1" then		-- Penance
+			tmpTexture:SetWidth(20)  
+			tmpTexture:SetHeight(20) 
+			tmpTexture:SetTexture("Interface\\ICONS\\Spell_Holy_Penance")
+			tmpTexture:SetPoint("CENTER", mf, "CENTER", -30, 30)
+			--tmpTexture:SetVertexColor(0,0,1)
+		elseif tmpTexture.Name == "CursorCastbarDotIndicator2" then		--Cascade
+			tmpTexture:SetWidth(20)  
+			tmpTexture:SetHeight(20) 
+			tmpTexture:SetTexture("Interface\\ICONS\\ability_priest_cascade")
+			tmpTexture:SetPoint("CENTER", mf, "CENTER", -52, 30)
+		
+		elseif tmpTexture.Name == "CursorCastbarDotIndicator5" then		--Evangelism
+			tmpTexture:SetWidth(20)  
+			tmpTexture:SetHeight(20) 
+			tmpTexture:SetTexture("Interface\\ICONS\\ability_priest_cascade")
+			tmpTexture:SetPoint("CENTER", mf, "CENTER", -52, 30)
+		
+		
+			
+		end
+		
+		
 		
 		if visible == true then
 			tmpTexture:Show()
